@@ -7,8 +7,8 @@
 #include "../include/graph/graph.hpp"
 #include "../include/parser/reader.hpp"
 #include "../include/parser/writer.hpp"
+#include "../include/interface/cli.hpp"
 #include "../include/interface/window.hpp"
-#include "../include/interface/interface.hpp"
 #include "../include/algorithm/astar.hpp"
 #include "../include/algorithm/dijkstra.hpp"
 
