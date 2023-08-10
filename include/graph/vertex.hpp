@@ -15,13 +15,14 @@ namespace graph
     class Vertex
     {
     public:
-        using Point = CGAL::Point_2<CGAL::Cartesian<T>>;
+        using ValueType = T;
         using EdgePtr = Edge<T> *;
         using Edges = std::vector<Edge<T> *>;
+        using Point = CGAL::Point_2<CGAL::Cartesian<T>>;
 
         Vertex(unsigned int position);
-        Vertex(unsigned int position, T x, T y);
-        Vertex(unsigned int position, T x, T y, const Edges &edges);
+        Vertex(unsigned int position, ValueType x, ValueType y);
+        Vertex(unsigned int position, ValueType x, ValueType y, const Edges &edges);
         Vertex(unsigned int position, Point coordinates);
         Vertex(unsigned int position, Point coordinates, const Edges &edges);
         ~Vertex();
@@ -29,8 +30,8 @@ namespace graph
         // Getters
         unsigned int get_position() const;
         Point get_coordinates() const;
-        T get_x() const;
-        T get_y() const;
+        ValueType get_x() const;
+        ValueType get_y() const;
         Edges get_edges() const;
 
         // Setters and modifiers
@@ -43,8 +44,8 @@ namespace graph
         bool is_connected_to_edge(const EdgePtr edge);
         std::size_t get_num_edges() const;
         std::vector<Vertex<T> *> get_neighboring_vertices() const;
-        T get_min_edge_cost() const;
-        T get_max_edge_cost();
+        ValueType get_min_edge_cost() const;
+        ValueType get_max_edge_cost();
         std::string to_string() const;
 
         // Debugging and printing
@@ -63,13 +64,13 @@ namespace graph
     inline Vertex<T>::Vertex(unsigned int position) : position(position), coordinates(Point(0, 0)) {}
 
     template <class T>
-    inline Vertex<T>::Vertex(unsigned int position, T x, T y) : position(position)
+    inline Vertex<T>::Vertex(unsigned int position, ValueType x, ValueType y) : position(position)
     {
         coordinates = Point(x, y);
     }
 
     template <class T>
-    inline Vertex<T>::Vertex(unsigned int position, T x, T y, const Edges &edges) : position(position), edges(edges)
+    inline Vertex<T>::Vertex(unsigned int position, ValueType x, ValueType y, const Edges &edges) : position(position), edges(edges)
     {
         coordinates = Point(x, y);
     }
@@ -96,13 +97,13 @@ namespace graph
     }
 
     template <class T>
-    T Vertex<T>::get_x() const
+    inline typename Vertex<T>::ValueType Vertex<T>::get_x() const
     {
         return coordinates.x();
     }
 
     template <class T>
-    T Vertex<T>::get_y() const
+    inline typename Vertex<T>::ValueType Vertex<T>::get_y() const
     {
         return coordinates.y();
     }
@@ -169,7 +170,7 @@ namespace graph
     }
 
     template <class T>
-    inline T Vertex<T>::get_min_edge_cost() const
+    inline typename Vertex<T>::ValueType Vertex<T>::get_min_edge_cost() const
     {
         T min_cost = std::numeric_limits<T>::max();
         for (const auto &edge : edges)
@@ -180,7 +181,7 @@ namespace graph
     }
 
     template <class T>
-    inline T Vertex<T>::get_max_edge_cost()
+    inline typename Vertex<T>::ValueType Vertex<T>::get_max_edge_cost()
     {
         T max_cost = std::numeric_limits<T>::lowest();
         for (const auto &edge : edges)
