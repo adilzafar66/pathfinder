@@ -1,5 +1,4 @@
-#ifndef WINDOW_H
-#define WINDOW_H
+#pragma once
 
 #include <QMainWindow>
 #include "../interface/display.hpp"
@@ -43,5 +42,3 @@ namespace interface
     }
 
 } // namespace interface
-
-#endif // WINDOW_H
