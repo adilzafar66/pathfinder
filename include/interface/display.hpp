@@ -50,7 +50,7 @@ namespace interface
     };
 
     template <class T>
-    GraphDisplay<T>::GraphDisplay(QWidget *parent) : QGraphicsView(parent), scale_factor(1)
+    inline GraphDisplay<T>::GraphDisplay(QWidget *parent) : QGraphicsView(parent), scale_factor(1)
     {
         setScene(&scene);
         setRenderHint(QPainter::Antialiasing);
@@ -63,19 +63,19 @@ namespace interface
     }
 
     template <class T>
-    void GraphDisplay<T>::set_graph(const Graph<T> &graph_)
+    inline void GraphDisplay<T>::set_graph(const Graph<T> &graph_)
     {
         graph = graph_;
     }
 
     template <class T>
-    void GraphDisplay<T>::set_scale_factor(double sf)
+    inline void GraphDisplay<T>::set_scale_factor(double sf)
     {
         scale_factor = sf;
     }
 
     template <class T>
-    void GraphDisplay<T>::draw_graph(bool path_only)
+    inline void GraphDisplay<T>::draw_graph(bool path_only)
     {
         scene.clear();
         if (!path_only)
@@ -100,7 +100,7 @@ namespace interface
     }
 
     template <class T>
-    void GraphDisplay<T>::draw_vertex(Vertex<T> *vertex, Qt::GlobalColor color)
+    inline void GraphDisplay<T>::draw_vertex(Vertex<T> *vertex, Qt::GlobalColor color)
     {
         double x = vertex->get_x() * scale_factor;
         double y = vertex->get_y() * scale_factor;
@@ -112,7 +112,7 @@ namespace interface
     }
 
     template <class T>
-    void GraphDisplay<T>::draw_edge(Edge<T> *edge, Qt::GlobalColor color, int thickness, double arrow_size)
+    inline void GraphDisplay<T>::draw_edge(Edge<T> *edge, Qt::GlobalColor color, int thickness, double arrow_size)
     {
         color = edge->get_cost() < 0 ? Qt::red : color;
         double x1 = edge->get_source()->get_x() * scale_factor;
