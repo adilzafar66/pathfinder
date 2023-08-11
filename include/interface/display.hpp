@@ -148,7 +148,7 @@ namespace interface
 
         ClickableLineItem *lineItem = new ClickableLineItem(edge->get_cost(), color, thickness);
         lineItem->setLine(x1, y1, x2, y2);
-        scene->addItem(lineItem);
+        scene.addItem(lineItem);
         // QGraphicsLineItem *line = scene.addLine(x1, y1, x2, y2, QPen(color, thickness, Qt::SolidLine, Qt::RoundCap));
 
         // Calculate the direction vector
