@@ -20,9 +20,9 @@ namespace interface
         }
 
     protected:
-        void mousePressEvent(QGraphicsSceneMouseEvent *event) override
+        void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override
         {
-            QGraphicsEllipseItem::mousePressEvent(event);
+            QGraphicsEllipseItem::mouseReleaseEvent(event);
             toggle_label();
         }
         QVariant itemChange(GraphicsItemChange change, const QVariant &value) override
