@@ -1,4 +1,8 @@
-Path Optimization in 2D Directed Graphs
+====================================================
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+PATH OPTIMIZATION IN 2D GRAPHS USING A* AND DIJKSTRA
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+====================================================
 
 This project is aimed at visualizing path finding algorithms particularly A* and Dijkstra. 
 It provides a command-line interface (CLI) and a graphical user interface (GUI) to interact with and visualize these algorithms on user-defined graphs.
