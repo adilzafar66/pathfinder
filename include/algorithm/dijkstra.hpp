@@ -55,6 +55,12 @@ namespace algorithm
         }
         // Reconstruct the shortest path from the previous map
         std::vector<unsigned int> path;
+        if (previous[end_position] == UINT_MAX)
+        {
+            // No path found
+            graph.set_dijkstra_path(path); // Set an empty path
+            return;
+        }
         unsigned int current_vertex_pos = end_position;
         while (current_vertex_pos != UINT_MAX && current_vertex_pos != start_position)
         {
