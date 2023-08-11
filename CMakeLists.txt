@@ -22,8 +22,8 @@ find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
 # add_executable(test_interface app/test_interface.cpp)
 # target_link_libraries(test_interface Qt4::QtCore Qt4::QtGui)
 
-# add_executable(test_dijkstra app/test_dijkstra.cpp)
-# target_link_libraries(test_dijkstra Qt4::QtCore Qt4::QtGui)
+add_executable(test_dijkstra app/test_dijkstra.cpp)
+target_link_libraries(test_dijkstra Qt4::QtCore Qt4::QtGui)
 
 # add_executable(test_file app/test_file.cpp)
 # target_link_libraries(test_file Qt4::QtCore Qt4::QtGui)
