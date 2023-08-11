@@ -22,10 +22,14 @@ namespace interface
             QGraphicsLineItem::mousePressEvent(event);
             toggle_label();
         }
-        void focusOutEvent(QFocusEvent *event) override
+        QVariant itemChange(GraphicsItemChange change, const QVariant &value) override
         {
-            QGraphicsLineItem::focusOutEvent(event);
-            clearFocus();
+            if (change == QGraphicsItem::ItemSelectedChange && scene())
+            {
+                // Prevent the item from being selected
+                return QVariant();
+            }
+            return QGraphicsLineItem::itemChange(change, value);
         }
 
     private:
