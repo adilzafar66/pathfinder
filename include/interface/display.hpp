@@ -255,14 +255,16 @@ namespace interface
         blue_label->setStyleSheet("background-color: darkBlue; color: white; padding: 2px;");
         legend_layout->addWidget(blue_label);
 
-        // Add the legend widget to the top right corner of the layout
-        QVBoxLayout *main_layout = new QVBoxLayout(this);
-        main_layout->addWidget(legend_widget, 0, Qt::AlignTop | Qt::AlignRight); // Align to top right corner
-        scene.addWidget(legend_widget);
+        // Create a widget to hold the legend widget and set its layout
+        QWidget *legend_container = new QWidget;
+        legend_container->setLayout(legend_layout);
 
-        // Set the main layout for the widget
+        // Add the legend container widget to the main layout of the window
+        QVBoxLayout *main_layout = new QVBoxLayout(this);
+        main_layout->addWidget(legend_container, 0, Qt::AlignTop | Qt::AlignRight); // Align to top right corner
         setLayout(main_layout);
     }
+
 } // namespace interface
 
 #endif // DISPLAY_H
