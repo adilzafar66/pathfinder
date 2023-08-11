@@ -1,4 +1,5 @@
-#pragma once
+#ifndef DISPLAY_H
+#define DISPLAY_H
 
 #include <QGraphicsScene>
 #include <QGraphicsView>
@@ -263,3 +264,5 @@ namespace interface
         setLayout(main_layout);
     }
 } // namespace interface
+
+#endif // DISPLAY_H

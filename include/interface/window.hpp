@@ -1,4 +1,5 @@
-#pragma once
+#ifndef WINDOW_H
+#define WINDOW_H
 
 #include <QMainWindow>
 #include "../interface/display.hpp"
@@ -44,5 +45,6 @@ namespace interface
         display->create_legend();
         display->draw_graph(path_only);
     }
-
 } // namespace interface
+
+#endif // WINDOW_H

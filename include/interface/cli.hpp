@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CLI_H
+#define CLI_H
 
 #include <iostream>
 #include <getopt.h>
@@ -111,3 +112,5 @@ namespace interface
     }
 
 } // namespace interface
+
+#endif // CLI_H

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef EDGE_H
+#define EDGE_H
 
 #include <iostream>
 #include <CGAL/squared_distance_2.h>
@@ -15,11 +16,13 @@ namespace graph
         using VertexPtr = Vertex<T> *;
         using ValueType = T;
 
+        // Constructors and Destructor
         Edge();
         Edge(double cost);
         Edge(VertexPtr src, VertexPtr dest, double cost);
         ~Edge();
 
+        // Getter methods
         VertexPtr get_source();
         VertexPtr get_destination();
         ValueType get_length();
@@ -27,6 +30,7 @@ namespace graph
         bool is_connected(VertexPtr v);
         bool is_valid();
 
+        // Other utility methods
         void set_source(VertexPtr src);
         void set_destination(VertexPtr dest);
         void set_cost(double cost);
@@ -34,10 +38,13 @@ namespace graph
         void reverse_direction();
         void update_cost(double new_cost);
 
+        // Comparison operators
         bool operator==(const Edge<T> &other);
         bool operator!=(const Edge<T> &other);
         bool operator<(const Edge<T> &other);
         bool operator>(const Edge<T> &other);
+
+        // Convert the Edge to a string representation
         std::string to_string() const;
 
     private:
@@ -46,6 +53,7 @@ namespace graph
         double cost;
     };
 
+    // Implementation of constructors, destructor, and setter methods
     template <class T>
     inline Edge<T>::Edge() : source(nullptr), destination(nullptr), cost(0.0) {}
 
@@ -57,7 +65,7 @@ namespace graph
 
     template <class T>
     inline Edge<T>::~Edge() {}
-
+    
     template <class T>
     inline void Edge<T>::set_source(VertexPtr src)
     {
@@ -83,6 +91,7 @@ namespace graph
         set_destination(dest);
     }
 
+    // Implementation of getter methods
     template <class T>
     inline Vertex<T> *Edge<T>::get_source()
     {
@@ -109,6 +118,7 @@ namespace graph
             destination->get_coordinates())));
     }
 
+    // Implementation of other utility methods
     template <class T>
     inline void Edge<T>::reverse_direction()
     {
@@ -133,6 +143,7 @@ namespace graph
         return source == v || destination == v;
     }
 
+    // Implementation of comparison operators
     template <class T>
     inline bool Edge<T>::operator==(const Edge<T> &other)
     {
@@ -165,3 +176,5 @@ namespace graph
         return oss.str();
     }
 } // namespace graph
+
+#endif // EDGE_H

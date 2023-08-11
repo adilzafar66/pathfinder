@@ -1,3 +1,6 @@
+#ifndef NODE_H
+#define NODE_H
+
 #include <QGraphicsEllipseItem>
 #include <QGraphicsTextItem>
 #include <QGraphicsScene>
@@ -43,3 +46,5 @@ namespace interface
         QGraphicsTextItem *label;
     };
 } // namespace interface
+
+#endif // NODE_H

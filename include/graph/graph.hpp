@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GRAPH_H
+#define GRAPH_H
 
 #include <iostream>
 #include <tuple>
@@ -475,3 +476,5 @@ namespace graph
         }
     }
 } // namespace graph
+
+#endif // GRAPH_H
