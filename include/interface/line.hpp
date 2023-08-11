@@ -22,12 +22,10 @@ namespace interface
             QGraphicsLineItem::mousePressEvent(event);
             toggle_label();
         }
-        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override
+        void focusOutEvent(QFocusEvent *event) override
         {
-            if (!option->state.testFlag(QStyle::State_Selected))
-            {
-                QGraphicsLineItem::paint(painter, option, widget);
-            }
+            QGraphicsLineItem::focusOutEvent(event);
+            clearFocus();
         }
 
     private:
