@@ -20,6 +20,7 @@
 #include <QLabel>
 #include "../graph/graph.hpp"
 #include "node.hpp"
+#include "line.hpp"
 
 using namespace graph;
 
@@ -144,7 +145,11 @@ namespace interface
         double y1 = edge->get_source()->get_y() * scale_factor;
         double x2 = edge->get_destination()->get_x() * scale_factor;
         double y2 = edge->get_destination()->get_y() * scale_factor;
-        QGraphicsLineItem *line = scene.addLine(x1, y1, x2, y2, QPen(color, thickness, Qt::SolidLine, Qt::RoundCap));
+
+        ClickableLineItem *lineItem = new ClickableLineItem(edge->get_cost(), color, thickness);
+        lineItem->setLine(x1, y1, x2, y2);
+        scene->addItem(lineItem);
+        // QGraphicsLineItem *line = scene.addLine(x1, y1, x2, y2, QPen(color, thickness, Qt::SolidLine, Qt::RoundCap));
 
         // Calculate the direction vector
         double dx = x2 - x1;
