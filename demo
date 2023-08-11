@@ -10,11 +10,11 @@ panic()
 # Get the directory in which the currently running script is located.
 cmd_dir=$(dirname "$0") || panic "cannot determine command directory"
 
-hello_program="$cmd_dir/hello"
-goodbye_program="$cmd_dir/goodbye"
+main_program="$cmd_dir/main"
+rand_program="$cmd_dir/random_graph_generator"
 
-echo "Running hello program"
-$hello_program || panic "hello program failed"
+echo "Running random graph generator"
+$rand_program 50 500 25 1 30 || panic "random graph generator program failed"
 
-echo "Running goodbye program"
-$goodbye_program || panic "goodbye program failed"
+echo "Running main program"
+$main_program -f "$cmd_dir/inputs/400x1400.txt" -a all -o path_output.txt || panic "main program failed"
