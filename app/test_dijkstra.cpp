@@ -65,6 +65,7 @@ int main(int argc, char** argv) {
     
     graph.create_mesh(data);
     compute_dijkstra(graph, 111, 387);
+    compute_astar(graph, 111, 387);
     QApplication app(argc, argv);
     MainWindow<int> main_window;
     main_window.set_graph(graph);
