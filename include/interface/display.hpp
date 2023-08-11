@@ -44,7 +44,7 @@ namespace interface
         void wheelEvent(QWheelEvent *event) override;
         void mousePressEvent(QMouseEvent *event) override;
         void mouseReleaseEvent(QMouseEvent *event) override;
-        
+
     private:
         Graph<T> graph;
         double scale_factor;
@@ -268,7 +268,7 @@ namespace interface
     }
 
     template <class T>
-    void GraphDisplay<T>::mousePressEvent(QMouseEvent *event) override
+    void GraphDisplay<T>::mousePressEvent(QMouseEvent *event)
     {
         if (event->button() == Qt::LeftButton)
             setDragMode(QGraphicsView::ScrollHandDrag);
@@ -276,7 +276,7 @@ namespace interface
     }
 
     template <class T>
-    void GraphDisplay<T>::mouseReleaseEvent(QMouseEvent *event) override
+    void GraphDisplay<T>::mouseReleaseEvent(QMouseEvent *event)
     {
         if (event->button() == Qt::LeftButton)
             setDragMode(QGraphicsView::NoDrag);
