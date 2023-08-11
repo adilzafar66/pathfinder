@@ -42,24 +42,9 @@ namespace interface
 
     protected:
         void wheelEvent(QWheelEvent *event) override;
-        void mousePressEvent(QMouseEvent *event) override
-        {
-            if (event->button() == Qt::LeftButton)
-            {
-                setDragMode(QGraphicsView::ScrollHandDrag);
-            }
-            QGraphicsView::mousePressEvent(event);
-        }
-
-        void mouseReleaseEvent(QMouseEvent *event) override
-        {
-            if (event->button() == Qt::LeftButton)
-            {
-                setDragMode(QGraphicsView::NoDrag);
-            }
-            QGraphicsView::mouseReleaseEvent(event);
-        }
-
+        void mousePressEvent(QMouseEvent *event) override;
+        void mouseReleaseEvent(QMouseEvent *event) override;
+        
     private:
         Graph<T> graph;
         double scale_factor;
@@ -280,6 +265,22 @@ namespace interface
         QVBoxLayout *main_layout = new QVBoxLayout(this);
         main_layout->addWidget(legend_container, 0, Qt::AlignTop | Qt::AlignRight); // Align to top right corner
         setLayout(main_layout);
+    }
+
+    template <class T>
+    void GraphDisplay<T>::mousePressEvent(QMouseEvent *event) override
+    {
+        if (event->button() == Qt::LeftButton)
+            setDragMode(QGraphicsView::ScrollHandDrag);
+        QGraphicsView::mousePressEvent(event);
+    }
+
+    template <class T>
+    void GraphDisplay<T>::mouseReleaseEvent(QMouseEvent *event) override
+    {
+        if (event->button() == Qt::LeftButton)
+            setDragMode(QGraphicsView::NoDrag);
+        QGraphicsView::mouseReleaseEvent(event);
     }
 
 } // namespace interface
