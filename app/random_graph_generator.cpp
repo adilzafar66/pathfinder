@@ -64,7 +64,7 @@ int main(int argc, char** argv) {
 
     gfw.write_start_end(start_end);
     gfw.write_vertices(vertices);
-    gfw.write_edges(edges);
+    gfw.write_edges(edges, "");
 
     return 0;
 }

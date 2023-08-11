@@ -33,7 +33,7 @@
 28 21 13
 29 32 47
 
-# optimal path edges
+# Edges
 15 15 4
 27 26 5
 16 9 3
