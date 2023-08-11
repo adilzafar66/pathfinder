@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
 
     int start, end;
     int num_vertices, num_edges;
-    int max_bound = 100;
+    int max_bound;
     int cost = 10;
 
     // Get num_vertices
@@ -33,6 +33,13 @@ int main(int argc, char** argv) {
     std::cout << "Enter the number of edges: ";
     if (!(std::cin >> num_edges)) {
         std::cerr << "Invalid input for num_edges." << std::endl;
+        return 1;
+    }
+
+    // Get max_bound
+    std::cout << "Enter the number of edges: ";
+    if (!(std::cin >> max_bound)) {
+        std::cerr << "Invalid input for max_bound." << std::endl;
         return 1;
     }
 
