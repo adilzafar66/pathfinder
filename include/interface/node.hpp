@@ -25,6 +25,13 @@ namespace interface
             QGraphicsEllipseItem::mousePressEvent(event);
             toggle_label();
         }
+        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override
+        {
+            if (!option->state.testFlag(QStyle::State_Selected))
+            {
+                QGraphicsEllipseItem::paint(painter, option, widget);
+            }
+        }
 
     private:
         void toggle_label()
