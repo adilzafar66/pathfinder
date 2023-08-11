@@ -46,7 +46,7 @@ int main(int argc, char **argv)
         }
         auto astar_path = main_graph.get_astar_path();
         auto dijkstra_path = main_graph.get_dijkstra_path();
-
+        std::cout << astar_path.size() << std::endl;
         if (astar_path.empty() && (algorithm == "astar" || algorithm == "all"))
             std::cout << "No path found using A*" << std::endl;
         if (dijkstra_path.empty() && (algorithm == "dijkstra" || algorithm == "all"))
