@@ -17,6 +17,7 @@
 #include <vector>
 #include <cmath>
 #include <QPen>
+#include <QLabel>
 #include "../graph/graph.hpp"
 #include "node.hpp"
 
