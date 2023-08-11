@@ -17,11 +17,40 @@ int main(int argc, char** argv) {
     std::vector<EdgeInfo> edges;
     std::vector<VertexInfo> vertices;
 
-    auto start_end = std::make_tuple<unsigned int>(25, 295);
-    int num_vertices = 100;
-    int num_edges = 500;
+    int start, end;
+    int num_vertices, num_edges;
     int max_bound = 100;
     int cost = 10;
+
+    // Get num_vertices
+    std::cout << "Enter the number of vertices: ";
+    if (!(std::cin >> num_vertices)) {
+        std::cerr << "Invalid input for num_vertices." << std::endl;
+        return 1;
+    }
+
+    // Get num_edges
+    std::cout << "Enter the number of edges: ";
+    if (!(std::cin >> num_edges)) {
+        std::cerr << "Invalid input for num_edges." << std::endl;
+        return 1;
+    }
+
+    // Get start vertex
+    std::cout << "Enter the start vertex: ";
+    if (!(std::cin >> start || start < 0)) {
+        std::cerr << "Invalid input for start." << std::endl;
+        return 1;
+    }
+
+    // Get end vertex
+    std::cout << "Enter the end vertex: ";
+    if (!(std::cin >> end || end > num_vertices)) {
+        std::cerr << "Invalid input for end." << std::endl;
+        return 1;
+    }
+
+    auto start_end = std::make_tuple<unsigned int>(start, end);
 
     for (int i = 0; i < num_vertices; i++) {
         vertices.emplace_back(i, 1 + (rand() % max_bound), 1 + (rand() % max_bound));
