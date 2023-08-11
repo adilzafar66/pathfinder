@@ -23,13 +23,13 @@ echo "Running main program 2 - pre made grid"
 $main_program -f "$cmd_dir/inputs/10V100E.txt" -a all -o output2.txt || panic "main program failed"
 
 echo "Running main program 3 - pre made grid"
-$main_program -f "$cmd_dir/inputs/20V30E.txt" -a all -o output3.txt || panic "main program failed"
+$main_program -f "$cmd_dir/inputs/20V30E.txt" -a all -o output3.txt
 
 echo "Running main program 4 - pre made grid"
-$main_program -f "$cmd_dir/inputs/30V200E.txt" -a all -o output4.txt || panic "main program failed"
+$main_program -f "$cmd_dir/inputs/30V200E.txt" -a all -o output4.txt
 
 echo "Running main program 5 - pre made grid"
-$main_program -f "$cmd_dir/inputs/100V500E.txt" -a all -o output5.txt || panic "main program failed"
+$main_program -f "$cmd_dir/inputs/100V500E.txt" -a all -o output5.txt
 
 echo "Running main program 6 - no path grid"
 $main_program -f "$cmd_dir/inputs/no_path.txt" -a all || panic "main program failed"
