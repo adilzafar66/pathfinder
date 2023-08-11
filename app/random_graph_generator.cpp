@@ -1,19 +1,9 @@
-#include "../include/interface/window.hpp"
-#include "../include/graph/graph.hpp"
-#include "../include/algorithm/dijkstra.hpp"
-#include "../include/algorithm/astar.hpp"
 #include "../include/parser/reader.hpp"
 #include "../include/parser/writer.hpp"
-#include "CGAL/Point_2.h"
-#include "CGAL/Cartesian.h"
-#include <QApplication>
 #include <stdlib.h>
 #include <iostream>
 
-using namespace algorithm;
-using namespace interface;
 using namespace parser;
-using namespace graph;
 
 int main(int argc, char** argv) {
     using EdgeInfo = std::tuple<unsigned int, unsigned int, double>;
@@ -23,7 +13,7 @@ int main(int argc, char** argv) {
         throw std::invalid_argument("Error: File path to write to is required.");
 
     GraphFileWriter<float> gfw(argv[1]);
-    Graph<int> graph;
+
     std::vector<EdgeInfo> edges;
     std::vector<VertexInfo> vertices;
 
