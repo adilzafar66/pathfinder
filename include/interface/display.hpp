@@ -186,7 +186,7 @@ namespace interface
         arrowhead_polygon.append(QPointF(arrow_x, arrow_y));
         arrowhead_polygon.append(QPointF(arrow_x1, arrow_y1));
         arrowhead_polygon.append(QPointF(arrow_x2, arrow_y2));
-        QGraphicsPolygonItem *arrowhead = scene.addPolygon(arrowhead_polygon, QPen(color, 1), QBrush(color));
+        QGraphicsPolygonItem *arrowhead = scene.addPolygon(arrowhead_polygon, QPen(Qt::red, 1), QBrush(Qt::red));
     }
 
     template <class T>
