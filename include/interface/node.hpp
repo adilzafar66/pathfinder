@@ -24,14 +24,6 @@ namespace interface
         {
             QGraphicsEllipseItem::mousePressEvent(event);
             toggle_label();
-            if (scene())
-            {
-                QGraphicsView *view = scene()->views().first();
-                if (view)
-                {
-                    view->setDragMode(QGraphicsView::ScrollHandDrag);
-                }
-            }
         }
         QVariant itemChange(GraphicsItemChange change, const QVariant &value) override
         {
