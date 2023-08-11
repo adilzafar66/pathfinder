@@ -18,11 +18,11 @@ find_package(CGAL REQUIRED)
 
 # Add executable for path_finder
 add_executable(path_finder app/path_finder.cpp)
-target_link_libraries(main Qt4::QtCore Qt4::QtGui CGAL::CGAL)
+target_link_libraries(path_finder Qt4::QtCore Qt4::QtGui CGAL::CGAL)
 
 # Add executable for random graph generator
 add_executable(random_graph_generator app/random_graph_generator.cpp)
 
-install(TARGETS main random_graph_generator DESTINATION bin)
+install(TARGETS path_finder random_graph_generator DESTINATION bin)
 install(DIRECTORY inputs DESTINATION bin)
 install(PROGRAMS demo DESTINATION bin)
