@@ -78,7 +78,8 @@ namespace algorithm
             path.push_back(current_position);
             current_position = came_from.at(current_position);
         }
-        std::reverse(path.begin(), path.end());
+        if (!path.empty()) // Only reverse the path if it's not empty
+            std::reverse(path.begin(), path.end());
         return path;
     }
 } // namespace algorithm
