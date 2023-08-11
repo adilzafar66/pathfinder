@@ -13,7 +13,7 @@ cmd_dir=$(dirname "$0") || panic "cannot determine command directory"
 main_program="$cmd_dir/main"
 
 echo "Running main program 1 - pre made grid"
-$main_program -f "$cmd_dir/400V1400E.txt" -a all -o output1.txt || panic "main program failed"
+$main_program -f "$cmd_dir/inputs/400V1400E.txt" -a all -o output1.txt || panic "main program failed"
 
 echo "Running main program 2 - pre made grid"
 $main_program -f "$cmd_dir/inputs/10V100E.txt" -a all -o output2.txt || panic "main program failed"
