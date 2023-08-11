@@ -69,7 +69,7 @@ int main(int argc, char **argv)
         QApplication app(argc, argv);
         MainWindow<double> main_window;
         main_window.set_graph(main_graph);
-        main_window.draw_graph(50, 10, path_only);
+        main_window.draw_graph(50, path_only);
         main_window.show();
         return app.exec();
     }

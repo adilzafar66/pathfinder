@@ -10,7 +10,7 @@ namespace interface
     class ClickableLineItem : public QGraphicsLineItem
     {
     public:
-        ClickableLineItem(double cost, Qt::GlobalColor color, int thickness, QGraphicsItem *parent = nullptr) : QGraphicsLineItem(parent), edge_cost(cost), label(nullptr) 
+        ClickableLineItem(double cost, Qt::GlobalColor color, int thickness, QGraphicsItem *parent = nullptr) : QGraphicsLineItem(parent), edge_cost(cost), label(nullptr)
         {
             this->setPen(QPen(color, thickness, Qt::SolidLine, Qt::RoundCap));
         }
