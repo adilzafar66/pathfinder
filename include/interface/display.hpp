@@ -194,7 +194,7 @@ namespace interface
     void GraphDisplay<T>::create_legend() {
         // Create the legend widget
         QWidget* legend_widget = new QWidget;
-        legend_widget->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum); // Set size policy
+        legend_widget->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         QHBoxLayout* legend_layout = new QHBoxLayout(legend_widget);
 
         // Create the green legend label
@@ -207,12 +207,7 @@ namespace interface
         blue_label->setStyleSheet("background-color: blue; color: white; padding: 2px;");
         legend_layout->addWidget(blue_label);
 
-        // Add the legend widget to the top right corner of the layout
-        QVBoxLayout* main_layout = new QVBoxLayout(this);
-        main_layout->addWidget(legend_widget, 0, Qt::AlignTop | Qt::AlignRight); // Align to top right corner
-        main_layout->addWidget(&scene);
-
-        // Set the main layout for the widget
-        setLayout(main_layout);
+        // Set the legend widget as the corner widget for the layout
+        setCornerWidget(legend_widget, Qt::TopRightCorner);
     }
 } // namespace interface
