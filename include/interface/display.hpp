@@ -32,6 +32,8 @@ namespace interface
         GraphDisplay(QWidget *parent = nullptr);
         void set_graph(const Graph<T> &graph_);
         void set_scale_factor(double sf);
+        void set_view();
+        void create_legend();
         void draw_graph(bool path_only = false);
         void zoom_in();
         void zoom_out();
@@ -44,7 +46,6 @@ namespace interface
         double scale_factor;
         QGraphicsScene scene;
         QPoint last_mouse_pos;
-        void create_legend();
         std::unordered_map<unsigned int, ClickableVertexItem *> circles;
         void draw_vertex(Vertex<T> *vertex, Qt::GlobalColor color = Qt::black);
         void draw_edge(Edge<T> *edge, Qt::GlobalColor color = Qt::black, int thickness = 1, double arrow_size = 8);
@@ -62,8 +63,6 @@ namespace interface
         setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
         setOptimizationFlag(QGraphicsView::DontAdjustForAntialiasing, true); // Disable AA adjustment
         setOptimizationFlag(QGraphicsView::DontSavePainterState, true);      // Disable painter state saving
-        scene.setSceneRect(-5000, -5000, 10000, 10000);                      // Example values, adjust as needed
-        create_legend();
     }
 
     template <class T>
@@ -76,6 +75,28 @@ namespace interface
     inline void GraphDisplay<T>::set_scale_factor(double sf)
     {
         scale_factor = sf;
+    }
+
+    template <class T>
+    inline void GraphDisplay<T>::set_view()
+    {
+        T x, y, width, height;
+        std::tie(x, y, width, height) = graph.get_bounds();
+        
+        // Calculate the new scene rect with increased size while keeping the center the same
+        qreal centerX = (x + width / 2) * scale_factor;
+        qreal centerY = (y + height / 2) * scale_factor;
+        qreal newWidth = width * scale_factor * 2;
+        qreal newHeight = height * scale_factor * 2;
+        qreal newX = centerX - newWidth / 2;
+        qreal newY = centerY - newHeight / 2;
+
+        // Set the new scene rect and center on the same point
+        setSceneRect(newX, newY, newWidth, newHeight);
+        QRectF fitRect(centerX - width / 2, centerY - height / 2, width, height);
+        fitInView(fitRect, Qt::KeepAspectRatio);
+        centerOn(centerX, centerY);
+        scale(0.5, 0.5);
     }
 
     template <class T>
@@ -194,7 +215,7 @@ namespace interface
     void GraphDisplay<T>::create_legend() {
         // Create the legend widget
         QWidget* legend_widget = new QWidget;
-        legend_widget->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+        legend_widget->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum); // Set size policy
         QHBoxLayout* legend_layout = new QHBoxLayout(legend_widget);
 
         // Create the green legend label
@@ -207,7 +228,12 @@ namespace interface
         blue_label->setStyleSheet("background-color: blue; color: white; padding: 2px;");
         legend_layout->addWidget(blue_label);
 
-        // Set the legend widget as the corner widget for the layout
-        setCornerWidget(legend_widget, Qt::TopRightCorner);
+        // Add the legend widget to the top right corner of the layout
+        QVBoxLayout* main_layout = new QVBoxLayout(this);
+        main_layout->addWidget(legend_widget, 0, Qt::AlignTop | Qt::AlignRight); // Align to top right corner
+        scene.addWidget(legend_widget);
+
+        // Set the main layout for the widget
+        setLayout(main_layout);
     }
 } // namespace interface

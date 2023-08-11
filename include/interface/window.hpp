@@ -37,8 +37,9 @@ namespace interface
         resize(800, 800);
         unsigned int size = num_vertices * 2;
         display->set_scale_factor(scale_factor);
+        display->set_view();
+        display->create_legend();
         display->draw_graph(path_only);
-        display->fitInView(0, 0, 1000, 1000, Qt::KeepAspectRatio);
     }
 
 } // namespace interface

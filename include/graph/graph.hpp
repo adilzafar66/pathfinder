@@ -24,12 +24,14 @@ namespace graph
         using EdgeElements = std::vector<std::tuple<unsigned int, unsigned int, double>>;
         using Element = std::tuple<Point_T, Point_T, double>;
         using Elements = std::vector<Element>;
+        using Bounds = std::tuple<T, T, T, T>;
 
         Graph();
         Graph(Vertices vertices);
         Graph(VertexElements vertex_elems, EdgeElements edge_elems);
         ~Graph();
 
+        Bounds get_bounds();
         Vertices get_vertices();
         VertexPtr get_vertex(unsigned int position);
         std::size_t get_num_vertices() const;
@@ -96,6 +98,39 @@ namespace graph
 
     template <class T>
     inline Graph<T>::~Graph() {}
+
+    template <class T>
+    inline typename Graph<T>::Bounds Graph<T>::get_bounds()
+    {
+        if (vertices.empty())
+        {
+            return std::make_tuple(0, 0, 0, 0); // Default bounds for an empty graph
+        }
+
+        ValueType min_x = vertices.begin()->second->get_x();
+        ValueType max_x = vertices.begin()->second->get_x();
+        ValueType min_y = vertices.begin()->second->get_y();
+        ValueType max_y = vertices.begin()->second->get_y();
+
+        for (const auto &vertex : vertices)
+        {
+            ValueType x = vertex.second->get_x();
+            ValueType y = vertex.second->get_y();
+
+            if (x < min_x)
+                min_x = x;
+            if (x > max_x)
+                max_x = x;
+            if (y < min_y)
+                min_y = y;
+            if (y > max_y)
+                max_y = y;
+        }
+
+        ValueType width = max_x - min_x;
+        ValueType height = max_y - min_y;
+        return std::make_tuple(min_x, min_y, width, height);
+    }
 
     template <class T>
     inline typename Graph<T>::Vertices Graph<T>::get_vertices()
