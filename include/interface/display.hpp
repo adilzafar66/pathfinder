@@ -81,9 +81,10 @@ namespace interface
     template <class T>
     inline void GraphDisplay<T>::set_view()
     {
+        // Get the bounds for the graph
         T x, y, width, height;
         std::tie(x, y, width, height) = graph.get_bounds();
-        
+
         // Calculate the new scene rect with increased size while keeping the center the same
         qreal centerX = (x + width / 2) * scale_factor;
         qreal centerY = (y + height / 2) * scale_factor;
@@ -104,6 +105,8 @@ namespace interface
     inline void GraphDisplay<T>::draw_graph(bool path_only)
     {
         scene.clear();
+
+        // Draw all the edges if the user requires
         if (!path_only)
         {
             for (auto &vertex : graph.get_vertices())
@@ -112,15 +115,19 @@ namespace interface
                     draw_edge(edge);
             }
         }
+
+        // Draw all vertices of the graph
         for (auto &vertex : graph.get_vertices())
             draw_vertex(vertex.second);
 
         auto astar_path = graph.get_astar_path();
         auto dijkstra_path = graph.get_dijkstra_path();
 
+        // Draw path for astar if exists
         if (!astar_path.empty())
             draw_path(astar_path, Qt::darkGreen);
 
+        // Draw path for dijkstra if exists
         if (!dijkstra_path.empty())
             draw_path(dijkstra_path, Qt::darkBlue);
     }
@@ -128,8 +135,11 @@ namespace interface
     template <class T>
     inline void GraphDisplay<T>::draw_vertex(Vertex<T> *vertex, Qt::GlobalColor color)
     {
+        // Get coordinates
         double x = vertex->get_x() * scale_factor;
         double y = vertex->get_y() * scale_factor;
+
+        // Create a clickable vertex when clicked shows the vertex position
         QPointF point(x, y);
         ClickableVertexItem *circle = new ClickableVertexItem(vertex->get_position(), color);
         circle->setPos(point);
@@ -140,16 +150,19 @@ namespace interface
     template <class T>
     inline void GraphDisplay<T>::draw_edge(Edge<T> *edge, Qt::GlobalColor color, int thickness, double arrow_size)
     {
-        color = edge->get_cost() < 0 ? Qt::red : color;
+        // Get edge coordinates
         double x1 = edge->get_source()->get_x() * scale_factor;
         double y1 = edge->get_source()->get_y() * scale_factor;
         double x2 = edge->get_destination()->get_x() * scale_factor;
         double y2 = edge->get_destination()->get_y() * scale_factor;
 
+        // Set the edge color
+        color = edge->get_cost() < 0 ? Qt::red : color;
+
+        // Create a clickable line which displays cost when clicked
         ClickableLineItem *lineItem = new ClickableLineItem(edge->get_cost(), color, thickness);
         lineItem->setLine(x1, y1, x2, y2);
         scene.addItem(lineItem);
-        // QGraphicsLineItem *line = scene.addLine(x1, y1, x2, y2, QPen(color, thickness, Qt::SolidLine, Qt::RoundCap));
 
         // Calculate the direction vector
         double dx = x2 - x1;
@@ -158,12 +171,13 @@ namespace interface
         double arrow_x = x2 - 8 * dx / length;
         double arrow_y = y2 - 8 * dy / length;
 
-        double angle = std::atan2(dy, dx); // Angle of the arrow
+        // Angle of the arrow
+        double angle = std::atan2(dy, dx);
 
         // Calculate the coordinates for the arrowhead triangle
-        double arrow_x1 = arrow_x + arrow_size * std::cos(angle + M_PI * 5.0 / 6.0); // 150 degrees
+        double arrow_x1 = arrow_x + arrow_size * std::cos(angle + M_PI * 5.0 / 6.0);
         double arrow_y1 = arrow_y + arrow_size * std::sin(angle + M_PI * 5.0 / 6.0);
-        double arrow_x2 = arrow_x + arrow_size * std::cos(angle - M_PI * 5.0 / 6.0); // -150 degrees
+        double arrow_x2 = arrow_x + arrow_size * std::cos(angle - M_PI * 5.0 / 6.0);
         double arrow_y2 = arrow_y + arrow_size * std::sin(angle - M_PI * 5.0 / 6.0);
 
         // Draw the arrowhead as a triangle
@@ -189,9 +203,12 @@ namespace interface
     template <class T>
     inline void GraphDisplay<T>::wheelEvent(QWheelEvent *event)
     {
-        int numDegrees = event->delta() / 8;
-        int numSteps = numDegrees / 15;
-        if (numSteps > 0)
+        // Get the mouse wheel position
+        int num_degrees = event->delta() / 8;
+        int num_steps = num_degrees / 15;
+
+        // Zoom in or out based on wheel position
+        if (num_steps > 0)
             zoom_in();
         else
             zoom_out();
@@ -201,40 +218,44 @@ namespace interface
     template <class T>
     inline void GraphDisplay<T>::draw_path(std::vector<unsigned int> path, Qt::GlobalColor edge_color)
     {
-
+        // Draw all the edges
         auto edges = graph.get_path_edges(path);
         for (auto &edge : edges)
         {
             draw_edge(edge, edge_color, 4);
         }
+        // Draw the first vertex as yellow
         draw_vertex(graph.get_vertex(path.front()), Qt::yellow);
         for (unsigned int i = 1; i < path.size() - 1; i++)
         {
+            // Draw all the rest vertices as green
             scene.removeItem(circles[path[i]]);
             draw_vertex(graph.get_vertex(path[i]), Qt::green);
         }
+        // Draw the last vertex as red
         draw_vertex(graph.get_vertex(path.back()), Qt::red);
     }
 
-    template<class T>
-    void GraphDisplay<T>::create_legend() {
+    template <class T>
+    void GraphDisplay<T>::create_legend()
+    {
         // Create the legend widget
-        QWidget* legend_widget = new QWidget;
+        QWidget *legend_widget = new QWidget;
         legend_widget->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum); // Set size policy
-        QHBoxLayout* legend_layout = new QHBoxLayout(legend_widget);
+        QHBoxLayout *legend_layout = new QHBoxLayout(legend_widget);
 
         // Create the green legend label
-        QLabel* green_label = new QLabel("A*");
+        QLabel *green_label = new QLabel("A*");
         green_label->setStyleSheet("background-color: darkGreen; color: white; padding: 2px;");
         legend_layout->addWidget(green_label);
 
         // Create the blue legend label
-        QLabel* blue_label = new QLabel("Dijkstra");
+        QLabel *blue_label = new QLabel("Dijkstra");
         blue_label->setStyleSheet("background-color: darkBlue; color: white; padding: 2px;");
         legend_layout->addWidget(blue_label);
 
         // Add the legend widget to the top right corner of the layout
-        QVBoxLayout* main_layout = new QVBoxLayout(this);
+        QVBoxLayout *main_layout = new QVBoxLayout(this);
         main_layout->addWidget(legend_widget, 0, Qt::AlignTop | Qt::AlignRight); // Align to top right corner
         scene.addWidget(legend_widget);
 
