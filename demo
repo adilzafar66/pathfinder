@@ -11,13 +11,9 @@ panic()
 cmd_dir=$(dirname "$0") || panic "cannot determine command directory"
 
 main_program="$cmd_dir/main"
-rand_program="$cmd_dir/random_graph_generator"
 
-echo "Running random graph generator"
-$rand_program "$cmd_dir/random_input_graph.txt" || panic "random graph generator program failed"
-
-echo "Running main program 1 - user random generated input file"
-$main_program -f "$cmd_dir/random_input_graph.txt" -a all -o output1.txt || panic "main program failed"
+echo "Running main program 1 - pre made grid"
+$main_program -f "$cmd_dir/400V1400E.txt" -a all -o output1.txt || panic "main program failed"
 
 echo "Running main program 2 - pre made grid"
 $main_program -f "$cmd_dir/inputs/10V100E.txt" -a all -o output2.txt || panic "main program failed"
