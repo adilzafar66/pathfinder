@@ -5,6 +5,7 @@ cmake_minimum_required(VERSION 3.13 FATAL_ERROR)
 project(cpp_project-pathfinder)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_VERBOSE_MAKEFILE true)
+set(CMAKE_BUILD_TYPE "Release")
 
 # Add header files.
 include_directories(include)
