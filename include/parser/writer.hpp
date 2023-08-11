@@ -13,12 +13,14 @@ namespace parser
     {
     public:
         using ValueType = T;
+        using VertexInfo = std::tuple<unsigned int, T, T>;
         using StartEndInfo = std::tuple<unsigned int, unsigned int>;
         using EdgeInfo = std::tuple<unsigned int, unsigned int, double>;
 
         GraphFileWriter(const std::string &filename);
         void write_start_end(const StartEndInfo &start_end);
-        void write_edges(const std::vector<EdgeInfo> &edges, std::string name = "optimal");
+        void write_vertices(const std::vector<VertexInfo> &vertices);
+        void write_edges(const std::vector<EdgeInfo> &edges, std::string name = "optimal path");
         void write_cost_distance(const double cost, const ValueType distance);
 
     private:
@@ -45,9 +47,22 @@ namespace parser
     }
 
     template <class T>
+    void GraphFileWriter<T>::write_vertices(const std::vector<VertexInfo> &vertices)
+    {
+        file << "# Vertices" << std::endl;
+        for (auto& vertex : vertices) 
+        {
+            unsigned int pos, x, y;
+            std::tie(pos, x, y) = vertex;
+            file << pos << " " << x << " " << y << std::endl;
+        }
+        file << std::endl;
+    }
+
+    template <class T>
     void GraphFileWriter<T>::write_edges(const std::vector<EdgeInfo> &edges, std::string name)
     {
-        file << "# " << name << " path edges" << std::endl;
+        file << "# " << name << " edges" << std::endl;
         for (const auto &edge : edges)
         {
             double cost;
