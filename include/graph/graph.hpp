@@ -201,8 +201,6 @@ namespace graph
     template <class T>
     inline typename Graph<T>::ValueType Graph<T>::get_distance(const VertexPtr& from_vertex, const VertexPtr& to_vertex)
     {
-        if (!from_vertex->has_valid_coordinates() || !to_vertex->has_valid_coordinates())
-            throw std::runtime_error("One of the vertices has invalid coordinates.");
         double squared_dist = CGAL::squared_distance(from_vertex->get_coordinates(), to_vertex->get_coordinates());
         return static_cast<typename Graph<T>::ValueType>(std::sqrt(squared_dist));
     }
