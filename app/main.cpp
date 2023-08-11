@@ -44,12 +44,18 @@ int main(int argc, char **argv)
             algorithm::compute_astar(main_graph, start, end);
             algorithm::compute_dijkstra(main_graph, start, end);
         }
+        auto astar_path = main_graph.get_astar_path();
+        auto dijkstra_path = main_graph.get_dijkstra_path();
+
+        if (astar_path.empty() && (algorithm == "astar" || algorithm == "all"))
+            std::cout << "No path found using A*" << std::endl;
+        if (dijkstra_path.empty() && (algorithm == "dijkstra" || algorithm == "all"))
+            std::cout << "No path found using Dijkstra" << std::endl;
+
         if (!output_file.empty())
         {
             GraphFileWriter<double> gf_writer(output_file);
             gf_writer.write_start_end(gf_reader.get_start_end());
-            auto astar_path = main_graph.get_astar_path();
-            auto dijkstra_path = main_graph.get_dijkstra_path();
             if (!astar_path.empty())
             {
                 gf_writer.write_edges(main_graph.get_path_edge_elements(astar_path), "A*");

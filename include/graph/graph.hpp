@@ -142,7 +142,13 @@ namespace graph
     template <class T>
     inline typename Graph<T>::VertexPtr Graph<T>::get_vertex(unsigned int positon)
     {
-        return vertices[positon];
+        if (vertex_exists(position)) {
+            return vertices[positon];
+        }
+        else
+        {
+            throw std::out_of_range("Vertex position not found");
+        }
     }
 
     template <class T>
