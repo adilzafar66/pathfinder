@@ -7,6 +7,7 @@
 #include <QGraphicsPolygonItem>
 #include <QWheelEvent>
 #include <QMouseEvent>
+#include <QVBoxLayout>
 #include <QBrush>
 #include <QPointF>
 #include <QToolTip>
@@ -42,6 +43,7 @@ namespace interface
         double scale_factor;
         QGraphicsScene scene;
         QPoint last_mouse_pos;
+        void create_legend();
         std::unordered_map<unsigned int, ClickableVertexItem *> circles;
         void draw_vertex(Vertex<T> *vertex, Qt::GlobalColor color = Qt::black);
         void draw_edge(Edge<T> *edge, Qt::GlobalColor color = Qt::black, int thickness = 1, double arrow_size = 8);
@@ -60,6 +62,7 @@ namespace interface
         setOptimizationFlag(QGraphicsView::DontAdjustForAntialiasing, true); // Disable AA adjustment
         setOptimizationFlag(QGraphicsView::DontSavePainterState, true);      // Disable painter state saving
         scene.setSceneRect(-5000, -5000, 10000, 10000);                      // Example values, adjust as needed
+        create_legend();
     }
 
     template <class T>
@@ -184,5 +187,31 @@ namespace interface
             draw_vertex(graph.get_vertex(path[i]), Qt::green);
         }
         draw_vertex(graph.get_vertex(path.back()), Qt::red);
+    }
+
+    template<class T>
+    void GraphDisplay<T>::create_legend() {
+        // Create the legend widget
+        QWidget* legend_widget = new QWidget;
+        legend_widget->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum); // Set size policy
+        QHBoxLayout* legend_layout = new QHBoxLayout(legend_widget);
+
+        // Create the green legend label
+        QLabel* green_label = new QLabel("A*");
+        green_label->setStyleSheet("background-color: green; color: white; padding: 2px;");
+        legend_layout->addWidget(green_label);
+
+        // Create the blue legend label
+        QLabel* blue_label = new QLabel("Dijkstra");
+        blue_label->setStyleSheet("background-color: blue; color: white; padding: 2px;");
+        legend_layout->addWidget(blue_label);
+
+        // Add the legend widget to the top right corner of the layout
+        QVBoxLayout* main_layout = new QVBoxLayout(this);
+        main_layout->addWidget(legend_widget, 0, Qt::AlignTop | Qt::AlignRight); // Align to top right corner
+        main_layout->addWidget(&scene);
+
+        // Set the main layout for the widget
+        setLayout(main_layout);
     }
 } // namespace interface
