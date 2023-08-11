@@ -42,6 +42,23 @@ namespace interface
 
     protected:
         void wheelEvent(QWheelEvent *event) override;
+        void mousePressEvent(QMouseEvent *event) override
+        {
+            if (event->button() == Qt::LeftButton)
+            {
+                setDragMode(QGraphicsView::ScrollHandDrag);
+            }
+            QGraphicsView::mousePressEvent(event);
+        }
+
+        void mouseReleaseEvent(QMouseEvent *event) override
+        {
+            if (event->button() == Qt::LeftButton)
+            {
+                setDragMode(QGraphicsView::NoDrag);
+            }
+            QGraphicsView::mouseReleaseEvent(event);
+        }
 
     private:
         Graph<T> graph;
