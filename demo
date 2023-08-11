@@ -31,4 +31,7 @@ $main_program -f "$cmd_dir/inputs/30V200E.txt" -a all -o path4_output.txt || pan
 echo "Running main program 5 - pre made grid"
 $main_program -f "$cmd_dir/inputs/100V500E.txt" -a all -o path5_output.txt || panic "main program failed"
 
-echo "Note: you can modify the start and end nodes input file in ./inputs to your requirements"
+echo "Running main program 6 - no path grid"
+$main_program -f "$cmd_dir/inputs/no_path.txt" -a all || panic "main program failed"
+
+echo "Note: you can modify the start and end nodes for any input file in ./inputs to your requirements"
