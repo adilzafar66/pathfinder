@@ -8,7 +8,7 @@ panic()
 }
 
 # Get the directory in which the currently running script is located.
-cmd_dir="$INSTALL_DIR/bin/path_finder" || panic "cannot determine command directory"
+cmd_dir=$(dirname "$0") || panic "cannot determine command directory"
 
 path_finder_program="$cmd_dir/path_finder"
 
