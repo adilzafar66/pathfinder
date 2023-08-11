@@ -220,12 +220,12 @@ namespace interface
 
         // Create the green legend label
         QLabel* green_label = new QLabel("A*");
-        green_label->setStyleSheet("background-color: green; color: white; padding: 2px;");
+        green_label->setStyleSheet("background-color: darkGreen; color: white; padding: 2px;");
         legend_layout->addWidget(green_label);
 
         // Create the blue legend label
         QLabel* blue_label = new QLabel("Dijkstra");
-        blue_label->setStyleSheet("background-color: blue; color: white; padding: 2px;");
+        blue_label->setStyleSheet("background-color: darkBlue; color: white; padding: 2px;");
         legend_layout->addWidget(blue_label);
 
         // Add the legend widget to the top right corner of the layout
