@@ -16,6 +16,7 @@ namespace interface
         {
             setRect(-8, -8, 16, 16);
             setBrush(color);
+            setFlag(QGraphicsItem::ItemIsSelectable);
         }
 
     protected:

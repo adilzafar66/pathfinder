@@ -13,6 +13,7 @@ namespace interface
         ClickableLineItem(double cost, Qt::GlobalColor color, int thickness, QGraphicsItem *parent = nullptr) : QGraphicsLineItem(parent), edge_cost(cost), label(nullptr)
         {
             this->setPen(QPen(color, thickness, Qt::SolidLine, Qt::RoundCap));
+            setFlag(QGraphicsItem::ItemIsSelectable);
         }
 
     protected:
