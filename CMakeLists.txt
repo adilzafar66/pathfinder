@@ -16,8 +16,8 @@ find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
 # Find the required CGAL library.
 find_package(CGAL REQUIRED)
 
-# Add executable for main
-add_executable(main app/main.cpp)
+# Add executable for path_finder
+add_executable(path_finder app/path_finder.cpp)
 target_link_libraries(main Qt4::QtCore Qt4::QtGui CGAL::CGAL)
 
 # Add executable for random graph generator
