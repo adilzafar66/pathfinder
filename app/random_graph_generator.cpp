@@ -37,7 +37,7 @@ int main(int argc, char** argv) {
     }
 
     // Get max_bound
-    std::cout << "Enter the number of edges: ";
+    std::cout << "Enter the max bound for x and y: ";
     if (!(std::cin >> max_bound)) {
         std::cerr << "Invalid input for max_bound." << std::endl;
         return 1;
