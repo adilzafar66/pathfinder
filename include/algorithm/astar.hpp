@@ -79,6 +79,7 @@ namespace algorithm
             path.push_back(current_position);
             current_position = came_from.at(current_position);
         }
+        std::reverse(path.begin(), path.end());
         return path;
     }
 } // namespace algorithm
