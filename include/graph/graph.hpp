@@ -140,10 +140,10 @@ namespace graph
     }
 
     template <class T>
-    inline typename Graph<T>::VertexPtr Graph<T>::get_vertex(unsigned int positon)
+    inline typename Graph<T>::VertexPtr Graph<T>::get_vertex(unsigned int position)
     {
         if (vertex_exists(position)) {
-            return vertices[positon];
+            return vertices[position];
         }
         else
         {
