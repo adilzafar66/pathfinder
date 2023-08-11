@@ -44,8 +44,6 @@ int main(int argc, char **argv)
             algorithm::compute_astar(main_graph, start, end);
             algorithm::compute_dijkstra(main_graph, start, end);
         }
-        auto astar_path = main_graph.get_astar_path();
-        auto dijkstra_path = main_graph.get_dijkstra_path();
         std::cout << astar_path.size() << std::endl;
         std::cout << dijkstra_path.size() << std::endl;
         if (astar_path.empty() && (algorithm == "astar" || algorithm == "all"))
