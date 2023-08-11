@@ -17,8 +17,18 @@ echo "Running random graph generator"
 $rand_program "$cmd_dir/random_input_graph.txt" || panic "random graph generator program failed"
 
 echo "Running main program 1 - user random generated input file"
-$main_program -f "$cmd_dir/random_input_graph.txt" -a all -o path_output.txt || panic "main program failed"
+$main_program -f "$cmd_dir/random_input_graph.txt" -a all -o path1_output.txt || panic "main program failed"
 
 echo "Running main program 2 - pre made grid"
-echo "Note: you can modify the start and end nodes in the ./input/400x1400.txt file to your requirements"
-$main_program -f "$cmd_dir/inputs/400x1400.txt" -a all -o path_output.txt || panic "main program failed"
+$main_program -f "$cmd_dir/inputs/10x100.txt" -a all -o path2_output.txt || panic "main program failed"
+
+echo "Running main program 3 - pre made grid"
+$main_program -f "$cmd_dir/inputs/20x30.txt" -a all -o path3_output.txt || panic "main program failed"
+
+echo "Running main program 4 - pre made grid"
+$main_program -f "$cmd_dir/inputs/30x200.txt" -a all -o path4_output.txt || panic "main program failed"
+
+echo "Running main program 5 - pre made grid"
+$main_program -f "$cmd_dir/inputs/100x500.txt" -a all -o path5_output.txt || panic "main program failed"
+
+echo "Note: you can modify the start and end nodes input file in ./inputs to your requirements"
