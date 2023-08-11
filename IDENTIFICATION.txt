@@ -1,0 +1,7 @@
+name "Adil Zafar Khan"
+student_id "V00924050"
+email "adilzafar66@gmail.com"
+term "2023-05"
+course "SENG475"
+section "T01"
+assignment "cpp_project"
