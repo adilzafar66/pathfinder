@@ -1,6 +1,7 @@
 #include "../include/interface/window.hpp"
 #include "../include/graph/graph.hpp"
 #include "../include/algorithm/dijkstra.hpp"
+#include "../include/algorithm/astar.hpp"
 #include "CGAL/Point_2.h"
 #include "CGAL/Cartesian.h"
 #include <QApplication>
