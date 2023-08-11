@@ -32,7 +32,7 @@ namespace interface
                 // Prevent the item from being selected
                 return QVariant();
             }
-            return QGraphicsLineItem::itemChange(change, value);
+            return QGraphicsEllipseItem::itemChange(change, value);
         }
 
     private:
