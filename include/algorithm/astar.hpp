@@ -38,7 +38,8 @@ namespace algorithm
             if (current_position == goal_position)
             {
                 auto optimal_path = reconstruct_astar_path(came_from, current_position);
-                optimal_path.insert(optimal_path.begin(), start_position);
+                if (!optimal_path.empty())
+                    optimal_path.insert(optimal_path.begin(), start_position);
                 graph.set_astar_path(optimal_path);
                 return;
             }
@@ -78,8 +79,6 @@ namespace algorithm
             path.push_back(current_position);
             current_position = came_from.at(current_position);
         }
-        if (!path.empty()) // Only reverse the path if it's not empty
-            std::reverse(path.begin(), path.end());
         return path;
     }
 } // namespace algorithm
